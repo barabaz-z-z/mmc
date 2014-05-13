@@ -55,6 +55,17 @@ namespace mmc
             return _treeDepartments;
         }
 
+        public void GetListEmployees(Int32 departmentId)
+        {
+
+            foreach (var employee in _context.Employees.Where(e => e.DepartmentId == departmentId))
+            {
+                var item = new ListViewItem(employee.Surname + " " + employee.Name + " " + employee.Patronimyc);
+                item.SubItems.Add(employee.BirthDate.Date.ToString());
+                item.Tag = employee.Id;
+            }
+        }
+
         private XDocument LoadXML()
         {
             try
