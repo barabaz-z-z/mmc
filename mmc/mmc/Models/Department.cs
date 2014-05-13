@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace mmc.Models
+namespace Mmc.Models
 {
     class Department
     {

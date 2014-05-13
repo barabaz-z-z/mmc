@@ -7,28 +7,24 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml;
 using System.Xml.Linq;
-using mmc.Models;
+using Mmc.Models;
 
-namespace mmc
+namespace Mmc
 {
     class DataManipulator
     {
         private const String XML_FILENAME = "Firm.xml";
         private MmcContext _context;
-        private List<TreeNode> _treeDepartments;
         private XNamespace _namespace;
-
-        public List<Department> Departments { get { return _context.Departments; } }
-        public List<Employee> Employees { get { return _context.Employees; } }
 
         public DataManipulator()
         {
             _context = new MmcContext();
-            _treeDepartments = new List<TreeNode>();
         }
 
-        public void InitDatabase()
+        public Boolean InitDatabase()
         {
+            var isInitialized = false;
             var document = LoadXML();
 
             if (document != null && 
@@ -38,34 +34,35 @@ namespace mmc
                 _namespace = document.Root.Name.NamespaceName;
                 _context.Departments = LoadDepartments(document.Root);
                 _context.Employees = LoadEmployees(document.Root);
+
+                isInitialized = true;
             }
+
+            return isInitialized;
         }
 
         public List<TreeNode> GetTreeDepartments()
         {
+            var treeDepartments = new List<TreeNode>();
+
             var rootDepartments = _context.Departments.Where(d => d.ParentId == -1).ToList();
             var restDepartments = _context.Departments.Where(d => d.ParentId != -1).ToList();
 
             foreach (var root in rootDepartments)
             {
-                _treeDepartments.Add(CreateNode(root));
-                AddChildNode(_treeDepartments.Last(), root.Id, restDepartments);
+                treeDepartments.Add(CreateNode(root));
+                AddChildNode(treeDepartments.Last(), root.Id, restDepartments);
             }
 
-            return _treeDepartments;
+            return treeDepartments;
         }
 
-        public void GetListEmployees(Int32 departmentId)
+        public List<Employee> GetEmployees(Int32 departmentId)
         {
-
-            foreach (var employee in _context.Employees.Where(e => e.DepartmentId == departmentId))
-            {
-                var item = new ListViewItem(employee.Surname + " " + employee.Name + " " + employee.Patronimyc);
-                item.SubItems.Add(employee.BirthDate.Date.ToString());
-                item.Tag = employee.Id;
-            }
+            var employees = _context.Employees.Where(e => e.DepartmentId == departmentId).ToList();
+            return employees;
         }
-
+        
         private XDocument LoadXML()
         {
             try
@@ -134,11 +131,12 @@ namespace mmc
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Не удалось загрузить из базы отделы./r/n" + ex.Message, "Ошибка");
+                MessageBox.Show("Не удалось загрузить из базы отделы.\r\n" + ex.Message, "Ошибка");
             }
 
             return new List<Department>();
         }
+
         private List<Employee> LoadEmployees(XElement root)
         {
             try
@@ -193,8 +191,8 @@ namespace mmc
             var childDepartments = departments.Where(d => d.ParentId == parentId).ToList();
             return childDepartments;
         }
-        
-        private void AddChildNode(TreeNode parentNode,Int32 parentId, List<Department> departments)
+
+        private void AddChildNode(TreeNode parentNode, Int32 parentId, List<Department> departments)
         {
             var childDepartments = departments.Where(d => d.ParentId == parentId).ToList();
             var restDepartments = departments.Where(d => d.ParentId != parentId).ToList();
@@ -202,14 +200,14 @@ namespace mmc
             foreach (var department in childDepartments)
             {
                 parentNode.Nodes.Add(CreateNode(department));
-                AddChildNode(_treeDepartments.Last(), department.Id, restDepartments);
+                AddChildNode(parentNode.LastNode, department.Id, restDepartments);
             }
         }
 
         private TreeNode CreateNode(Department department)
         {
             var nodeDepartment = new TreeNode(department.Name);
-            nodeDepartment.Tag = department;
+            nodeDepartment.Tag = department.Id;
 
             return nodeDepartment;
         }
