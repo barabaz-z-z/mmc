@@ -1,0 +1,92 @@
+<?xml version="1.0" standalone="yes"?>
+<FIRMDataSet xmlns="http://tempuri.org/FIRMDataSet.xsd">
+  <tblDeps>
+    <nDepId>1</nDepId>
+    <cCode>ФИРМА</cCode>
+    <cName>Фирма "Рога и копыта"</cName>
+  </tblDeps>
+  <tblDeps>
+    <nDepId>2</nDepId>
+    <nPrnDepId>1</nPrnDepId>
+    <cCode>МАРКЕТ</cCode>
+    <cName>Отдел маркетинга</cName>
+  </tblDeps>
+  <tblDeps>
+    <nDepId>3</nDepId>
+    <nPrnDepId>1</nPrnDepId>
+    <cCode>ПРОДАЖИ</cCode>
+    <cName>Отдел продаж</cName>
+  </tblDeps>
+  <tblDeps>
+    <nDepId>4</nDepId>
+    <nPrnDepId>1</nPrnDepId>
+    <cCode>ИНФТЕХ</cCode>
+    <cName>Отдел информационных технологий</cName>
+  </tblDeps>
+  <tblDeps>
+    <nDepId>5</nDepId>
+    <nPrnDepId>3</nPrnDepId>
+    <cCode>ПРОД.ОПТ</cCode>
+    <cName>Сектор оптовых продаж</cName>
+  </tblDeps>
+  <tblDeps>
+    <nDepId>6</nDepId>
+    <nPrnDepId>3</nPrnDepId>
+    <cCode>ПРОД.РОЗН</cCode>
+    <cName>Сектор розничных продаж</cName>
+  </tblDeps>
+  <tblDeps>
+    <nDepId>7</nDepId>
+    <nPrnDepId>4</nPrnDepId>
+    <cCode>ПРОГР</cCode>
+    <cName>Сектор разработки программного обеспечения</cName>
+  </tblDeps>
+  <tblDeps>
+    <nDepId>8</nDepId>
+    <nPrnDepId>4</nPrnDepId>
+    <cCode>АДМИН</cCode>
+    <cName>Сектор администрирования сетей</cName>
+  </tblDeps>
+  <tblEmps>
+    <nEmpId>1</nEmpId>
+    <nDepId>4</nDepId>
+    <cLastName>Иванов</cLastName>
+    <cFirstName>Иван</cFirstName>
+    <cPatronymic>Иванович</cPatronymic>
+  </tblEmps>
+  <tblEmps>
+    <nEmpId>2</nEmpId>
+    <nDepId>4</nDepId>
+    <cLastName>Петров</cLastName>
+    <cFirstName>Петр</cFirstName>
+    <cPatronymic>Петрович</cPatronymic>
+  </tblEmps>
+  <tblEmps>
+    <nEmpId>3</nEmpId>
+    <nDepId>4</nDepId>
+    <cLastName>Сидоров</cLastName>
+    <cFirstName>Сидор</cFirstName>
+    <cPatronymic>Сидорович</cPatronymic>
+  </tblEmps>
+  <tblEmps>
+    <nEmpId>4</nEmpId>
+    <nDepId>4</nDepId>
+    <cLastName>Кондратьев</cLastName>
+    <cFirstName>Кондратий</cFirstName>
+    <cPatronymic>Кондратьевич</cPatronymic>
+  </tblEmps>
+  <tblEmps>
+    <nEmpId>5</nEmpId>
+    <nDepId>4</nDepId>
+    <cLastName>Поликарпов</cLastName>
+    <cFirstName>Поликарп</cFirstName>
+    <cPatronymic>Поликарпович</cPatronymic>
+  </tblEmps>
+  <tblEmps>
+    <nEmpId>6</nEmpId>
+    <nDepId>1</nDepId>
+    <cLastName>Директоров</cLastName>
+    <cFirstName>Директор</cFirstName>
+    <cPatronymic>Директорович</cPatronymic>
+  </tblEmps>
+</FIRMDataSet>
